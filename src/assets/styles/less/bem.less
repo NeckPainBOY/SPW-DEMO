@@ -1,0 +1,38 @@
+@namespace: "SPW";
+@common-separator: "-";
+@element-separator: "__";
+@modifier-separator: "--";
+@state-prefix: "is";
+
+// SPW-button__item--focus.is-active {}
+.b(@block, @content) {
+    @B: ~"@{namespace}-@{block}";
+
+    .@{B} {
+        @content();
+    }
+
+}
+
+.e(@element, @content) {
+    @E: ~"@{element-separator}@{element}";
+
+    &@{E} {
+        @content();
+    }
+}
+
+.m(@modifier, @content) {
+    &@{modifier-separator}@{modifier} {
+        @content();
+    }
+}
+
+// block__element.is-active {}
+.is(@state, @prefix: @state-prefix, @content) {
+    @state-prefix :~"@{prefix}-@{state}";
+
+    &.@{state-prefix} {
+        @content();
+    }
+}
