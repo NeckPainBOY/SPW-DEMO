@@ -17,6 +17,11 @@ const routes = [
     name: "NotFound",
     component: () => import("@/components/NotFound/NotFound.vue"),
   },
+  {
+    path: "/home",
+    name: "Home",
+    component: () => import("@/views/Home/Home.vue"),
+  },
 ];
 
 export const router = createRouter({

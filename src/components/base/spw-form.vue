@@ -1,7 +1,7 @@
 <template>
   <a-form
     :model="formState"
-    name="basic"
+    name="basic-form"
     :label-col="{ span: 8 }"
     :wrapper-col="{ span: 16 }"
     autocomplete="off"
@@ -14,26 +14,35 @@
       :name="formItem.name"
       :rules="formItem.rules"
     >
-      <!-- <component :is="formItem.component"></component> -->
-      <a-input
+      <component
+        :is="formItem.component"
+        v-model:value="formState[formItem.name]"
+      ></component>
+      <!-- <a-input
         v-model:value="formItem.value"
         placeholder="请输入用户名"
-      ></a-input>
-      
+      ></a-input> -->
     </a-form-item>
+    <a-button class="w-full mx-auto my-0" type="primary" html-type="submit"
+      >提交</a-button
+    >
   </a-form>
 </template>
 
 <script lang="ts" setup>
 import { capitalizeFirstLetter } from "@/utils/letter";
+import { computed, reactive } from "@vue/reactivity";
 import { Rule } from "ant-design-vue/es/form";
-import { computed } from "vue";
 
 interface FormItem {
   name: string;
   slot: string;
   value?: string;
   rules?: Rule[];
+  component: string;
+}
+interface FormState {
+  [key: string]: string | undefined;
 }
 
 defineOptions({
@@ -42,18 +51,18 @@ defineOptions({
 
 // 获取对应规则
 let { formArray } = defineProps<{ formArray: FormItem[] }>();
-
 const formState = computed(() => {
-  let templateState: string[] = [];
+  let templateState: FormState = {};
   formArray.map((item) => {
-    templateState.push(item.name);
+    const { name, value } = item;
+    templateState[name] = value;
   });
   console.log(templateState);
-  return templateState;
+  return reactive(templateState);
 });
-
+const emit = defineEmits(["successLogin"]);
 const onFinish = (values: any) => {
-  console.log("Success:", values);
+  emit("successLogin", values);
 };
 
 const onFinishFailed = (errorInfo: any) => {

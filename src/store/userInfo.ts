@@ -14,7 +14,6 @@ export const useUserInfoStore = defineStore("userInfo", {
     setUserLang(lang: Language) {
       this.lang = lang;
       localStorage.setItem("lang", lang);
-      console.log("set user lang", lang);
     },
   },
 });

@@ -1,16 +1,13 @@
 <template>
-  <div class="SPW-header">
-    <div className="mb-4">
-      <span className="mb-4">Change locale of components:</span>
-      <a-radio-group v-model:value="locale">
-        <a-radio-button
-          :key="locale"
-          :value="locale"
-          @click="changeLanguage(locale)"
-          >En</a-radio-button
-        >
-      </a-radio-group>
-    </div>
+  <div class="flex justify-end p-4 SPW-header">
+    <a-radio-group v-model:value="locale">
+      <a-radio-button
+        :key="locale"
+        :value="locale"
+        @click="changeLanguage(locale)"
+        >En</a-radio-button
+      >
+    </a-radio-group>
   </div>
 </template>
 
