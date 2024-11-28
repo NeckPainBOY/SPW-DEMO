@@ -42,7 +42,7 @@ const userForm = [
 
 const handleSuccessLogin = (values: string) => {
   console.log("success login", values);
-  router.push("/home");
+  router.push("/layout/home");
 };
 </script>
 
